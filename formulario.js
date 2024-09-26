@@ -27,7 +27,7 @@ formulario.onsubmit = function (e) {
     e.classList.add("error");
     return; //para si hay error
   } else {
-    e.classList.add("error")
+    e.classList.remove("error");
   }//else agregado
 
   if (nombre.length > 0 && (edad > 18 && edad < 120)) {
@@ -44,20 +44,17 @@ document.body.appendChild(botonBorrar);
 
 function agregarInvitado(nombre, edad, nacionalidad) {
 
-  if (nacionalidad === "ar") {
-    nacionalidad = "Argentina"
-  }//if
-  else if (nacionalidad === "mx") {
-    nacionalidad = "Mexicana"
-  }//else if
-  else if (nacionalidad === "vnzl") {
-    nacionalidad = "Venezolana"
-  }//else if
-  else if (nacionalidad === "per") {
-    nacionalidad = "Peruana"
-  }//elseif
 
-  var lista = document.getElementById("lista-de-invitados")
+  var nacionalidades = { //simplificación
+    ar: "Argentina",
+    mx: "Mexicana",
+    vnzl: "Venezolana",
+    per: "Peruana"
+  };//var
+
+  nacionalidad = nacionalidades[nacionalidad]||nacionalidad;
+
+  var lista = document.querySelector(".lista-de-invitados");
 
   var elementoLista = document.createElement("div")
   elementoLista.classList.add("elemento-lista")
@@ -90,13 +87,9 @@ function agregarInvitado(nombre, edad, nacionalidad) {
 
   var botonBorrar = document.createElement("button")
   botonBorrar.textContent = "Eliminar invitado";
-  // botonBorrar.id = "boton-borrar"
-  // var corteLinea = document.createElement("br")
-  // elementoLista.appendChild(corteLinea)
   elementoLista.appendChild(botonBorrar);
 
   botonBorrar.onclick = function () {
-    // this.parentNode.style.display = 'none';
     elementoLista.remove();//elimina el elemento de la lista 
   }//onclick
 }//agregarInvitado
