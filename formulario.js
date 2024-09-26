@@ -1,9 +1,8 @@
-var formulario = document.querySelector('.form'); //se cambió con un punto al inicio para seleccionar bien
+var formulario = document.querySelector("#form"); //se corrigio en html
+formulario.onsubmit = function (e) {
 
-formulario.onsubmit = function(e) {
+  e.preventDefault(); //corección del método
 
-  e.prevent();
-  
   var n = formulario.elements[0]
   var e = formulario.elements[1]
   var na = formulario.elements[2]
@@ -16,15 +15,23 @@ formulario.onsubmit = function(e) {
   console.log(nombre, edad)
   console.log(nacionalidad)
 
+  //validación entradas
   if (nombre.length === 0) {
     n.classList.add("error")
-  }//if
-  if (edad < 18 || edad > 120) {
-    e.classList.add("error")
-  }//if
+    return; //para si hay error
+  } else {
+    n.classList.remove("error");
 
-if (nombre.length > 0 && (edad > 18  && edad < 120) ) {
-  agregarInvitado(nombre, edad, nacionalidad)
+  }//else
+  if (edad < 18 || edad > 120) {
+    e.classList.add("error");
+    return; //para si hay error
+  } else {
+    e.classList.add("error")
+  }//else agregado
+
+  if (nombre.length > 0 && (edad > 18 && edad < 120)) {
+    agregarInvitado(nombre, edad, nacionalidad)
   }//if
 }//function
 
@@ -50,46 +57,46 @@ function agregarInvitado(nombre, edad, nacionalidad) {
     nacionalidad = "Peruana"
   }//elseif
 
-var lista = document.getElementById("lista-de-invitados")
+  var lista = document.getElementById("lista-de-invitados")
 
-var elementoLista = document.createElement("div")
-elementoLista.classList.added("elemento-lista")
-lista.appendChild(elementoLista)
+  var elementoLista = document.createElement("div")
+  elementoLista.classList.add("elemento-lista")
+  lista.appendChild(elementoLista)
 
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = "Nombre: "
-inputNombre.value = nombre 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
+  var spanNombre = document.createElement("span")
+  var inputNombre = document.createElement("input")
+  var espacio = document.createElement("br")
+  spanNombre.textContent = "Nombre: "
+  inputNombre.value = nombre
+  elementoLista.appendChild(spanNombre)
+  elementoLista.appendChild(inputNombre)
+  elementoLista.appendChild(espacio)
 
-function crearElemento(descripcion, valor) {
-var spanNombre = document.createElement("span")
-var inputNombre = document.createElement("input")
-var espacio = document.createElement("br")
-spanNombre.textContent = descripcion + ": "
-inputNombre.value = valor 
-elementoLista.appendChild(spanNombre)
-elementoLista.appendChild(inputNombre)
-elementoLista.appendChild(espacio)
-}
+  function crearElemento(descripcion, valor) {
+    var spanNombre = document.createElement("span")
+    var inputNombre = document.createElement("input")
+    var espacio = document.createElement("br")
+    spanNombre.textContent = descripcion + ": "
+    inputNombre.value = valor
+    elementoLista.appendChild(spanNombre)
+    elementoLista.appendChild(inputNombre)
+    elementoLista.appendChild(espacio)
+  }//crearElemento
 
-crearElemento("Nombre", nombre)
-crearElemento("Edad", edad)
-crearElemento("Nacionalidad", nacionalidad)
+  crearElemento("Nombre", nombre)
+  crearElemento("Edad", edad)
+  crearElemento("Nacionalidad", nacionalidad)
 
 
-var botonBorrar = document.createElement("button")
-botonBorrar.textContent = "Eliminar invitado"
-botonBorrar.id = "boton-borrar"
-var corteLinea = document.createElement("br")
-elementoLista.appendChild(corteLinea)
-elementoLista.appendChild(botonBorrar);
+  var botonBorrar = document.createElement("button")
+  botonBorrar.textContent = "Eliminar invitado";
+  // botonBorrar.id = "boton-borrar"
+  // var corteLinea = document.createElement("br")
+  // elementoLista.appendChild(corteLinea)
+  elementoLista.appendChild(botonBorrar);
 
- botonBorrar.onclick = function() {
-// this.parentNode.style.display = 'none';
-botonBorrar.parentNode.remove()
-  }
-}
+  botonBorrar.onclick = function () {
+    // this.parentNode.style.display = 'none';
+    elementoLista.remove();//elimina el elemento de la lista 
+  }//onclick
+}//agregarInvitado
