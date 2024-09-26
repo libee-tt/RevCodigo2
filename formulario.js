@@ -1,4 +1,4 @@
-var formulario = document.querySelector("#form")
+var formulario = document.querySelector('.form'); //se cambió con un punto al inicio para seleccionar bien
 
 formulario.onsubmit = function(e) {
 
@@ -18,17 +18,15 @@ formulario.onsubmit = function(e) {
 
   if (nombre.length === 0) {
     n.classList.add("error")
-  }
+  }//if
   if (edad < 18 || edad > 120) {
     e.classList.add("error")
-  }
+  }//if
 
-if (nombre.length > 0 
-  && (edad > 18 
-    && edad < 120) ) {
+if (nombre.length > 0 && (edad > 18  && edad < 120) ) {
   agregarInvitado(nombre, edad, nacionalidad)
-  }
-}
+  }//if
+}//function
 
 var botonBorrar = document.createElement("button")
 botonBorrar.textContent = "Eliminar invitado"
@@ -41,16 +39,16 @@ function agregarInvitado(nombre, edad, nacionalidad) {
 
   if (nacionalidad === "ar") {
     nacionalidad = "Argentina"
-  }
+  }//if
   else if (nacionalidad === "mx") {
     nacionalidad = "Mexicana"
-  }
+  }//else if
   else if (nacionalidad === "vnzl") {
     nacionalidad = "Venezolana"
-  }
+  }//else if
   else if (nacionalidad === "per") {
     nacionalidad = "Peruana"
-  }
+  }//elseif
 
 var lista = document.getElementById("lista-de-invitados")
 
